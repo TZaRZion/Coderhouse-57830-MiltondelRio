@@ -1,0 +1,22 @@
+{% extends 'servicios/base.html' %}
+
+{% block header %}
+Pedidos: Registros
+{% endblock header %}
+
+{% block main %}
+    <button>
+        <a href="{% url 'pedido_create' %}">Crear Registro</a>
+    </button>
+    {% for object in object_list %}
+        <p>
+            Servicio: {{ object.servicio | upper}} -
+            Cliente: {{ object.cliente | upper}}
+            Fecha: {{ object.fecha_entrega | date:"d/m/Y"}}
+            Estado: {{ object.estado }}
+
+        </p>
+    {% empty%}
+        <p>No hay registros.</p>
+    {% endfor %}
+{% endblock main %}

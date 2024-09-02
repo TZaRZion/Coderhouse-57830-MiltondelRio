@@ -1,0 +1,16 @@
+{% extends 'servicios/base.html' %}
+
+{% block header %}
+Servicios: Registros
+{% endblock header %}
+
+{% block main %}
+    <button>
+        <a href="{% url 'servicio_create' %}">Crear Registro</a>
+    </button>
+    {% for object in object_list %}
+        <p>{{ object.nombre | upper }} ${{ object.precio }}</p>
+    {% empty%}
+        <p>No hay registros.</p>
+    {% endfor %}
+{% endblock main %}
