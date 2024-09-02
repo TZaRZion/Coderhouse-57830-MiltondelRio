@@ -1,0 +1,27 @@
+
+{% extends 'servicios/base.html' %}
+
+{% block header %}
+Buscar Cliente
+{% endblock header %}
+
+{% block main %}
+<h1>Buscar Cliente</h1>
+
+<form method="get">
+    {{ form.as_p }}
+    <button type="submit">Buscar</button>
+</form>
+
+{% if resultados %}
+    <h2>Resultados:</h2>
+    <ul>
+        {% for cliente in resultados %}
+            <li>{{ cliente.nombre }} - {{ cliente.email }}</li>
+        {% endfor %}
+    </ul>
+{% elif request.GET %}
+    <p>No se encontraron resultados.</p>
+{% endif %}
+
+{% endblock main %}

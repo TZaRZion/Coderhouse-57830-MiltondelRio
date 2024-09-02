@@ -6,6 +6,7 @@ class Cliente(models.Model):
     apellido = models.CharField(max_length=50)
     celular = models.CharField(max_length=15)
     domicilio = models.CharField(max_length=200, blank=True, null=True)
+    email = models.EmailField(default="mail@example.com")
 
     def __str__(self) -> str:
         return f"{self.nombre} {self.apellido} ({self.celular})"

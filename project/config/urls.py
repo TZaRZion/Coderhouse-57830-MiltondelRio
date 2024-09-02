@@ -27,7 +27,7 @@ urlpatterns = [
     path("cliente/create/", views.cliente_create, name = "cliente_create"),
     path("servicio/create/", views.servicio_create, name = "servicio_create"),
     path("pedido/create/", views.pedido_create, name = "pedido_create"),
-
+    path("buscar/", views.buscar_cliente, name="buscar_cliente"),
 
 
 ]

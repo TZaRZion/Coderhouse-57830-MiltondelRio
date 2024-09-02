@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Cliente, Servicio, Pedido
-from .forms import ClienteForm, PedidoForm, ServicioForm
+from .forms import ClienteForm, PedidoForm, ServicioForm, BuscarClienteForm
 
 def index(request):
     return render(request, "servicios/index.html")
@@ -55,3 +55,18 @@ def pedido_create(request):
             form.save()
             return redirect("pedido_list")
     return render(request, "servicios/pedido_create.html", {"form": form})
+
+
+
+
+def buscar_cliente(request):
+    form = BuscarClienteForm()
+    resultados = None
+
+    if request.method == "GET" and "query" in request.GET:
+        form = BuscarClienteForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            resultados = Cliente.objects.filter(nombre__icontains=query)
+
+    return render(request, "servicios/buscar_cliente.html", {"form": form, "resultados": resultados})

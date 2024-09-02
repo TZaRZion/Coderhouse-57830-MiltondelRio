@@ -9,6 +9,9 @@ class ClienteForm(forms.ModelForm):
         fields = "__all__"
 
 
+class BuscarClienteForm(forms.Form):
+    query = forms.CharField(label='Buscar Cliente', max_length=100)
+
 class ServicioForm(forms.ModelForm):
     class Meta:
         model = Servicio

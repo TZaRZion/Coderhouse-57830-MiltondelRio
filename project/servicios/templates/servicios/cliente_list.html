@@ -8,6 +8,9 @@ Clientes: Registros
     <button>
         <a href="{% url 'cliente_create' %}">Crear Registro</a>
     </button>
+    <button>
+        <a href="{% url 'buscar_cliente' %}">Buscar Cliente</a>
+    </button>
     {% for object in object_list %}
         <p>{{ object | upper }} {{ object.nombre }} ({{object.celular}})</p>
     {% empty%}
