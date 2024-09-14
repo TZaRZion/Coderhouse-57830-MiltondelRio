@@ -10,7 +10,8 @@ class ClienteForm(forms.ModelForm):
 
 
 class BuscarClienteForm(forms.Form):
-    query = forms.CharField(label='Buscar Cliente', max_length=100)
+    query = forms.CharField(label="Buscar Cliente", max_length=100)
+
 
 class ServicioForm(forms.ModelForm):
     class Meta:
@@ -23,9 +24,13 @@ class PedidoForm(forms.ModelForm):
         queryset=Servicio.objects.all(), empty_label="Seleccione un cliente"
     )
     servicio = forms.ModelChoiceField(
-        queryset=Servicio.objects.filter(disponible=True), empty_label="Seleccione un servicio"
+        queryset=Servicio.objects.filter(disponible=True),
+        empty_label="Seleccione un servicio",
     )
+
     class Meta:
         model = Pedido
         fields = "__all__"
-        widgets = {"fecha_entrega": forms.DateTimeInput(attrs={"type":"datetime-local"})}
+        widgets = {
+            "fecha_entrega": forms.DateTimeInput(attrs={"type": "datetime-local"})
+        }
