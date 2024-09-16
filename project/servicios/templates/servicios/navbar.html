@@ -1,4 +1,31 @@
-<button><a href="{% url 'index' %}">🏡Home</a></button>
-<button><a href="{% url 'cliente_list' %}">Clientes</a></button>
-<button><a href="{% url 'servicio_list' %}">Servicios</a></button>
-<button><a href="{% url 'pedido_list' %}">Pedidos</a></button>
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+</head> mejoramelo dandole estilo y un orden un poco mas moderno 
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'index' %}">Inicio</a></li>
+            <li><a href="{% url 'cliente_list' %}">Clientes</a></li>
+            <li><a href="{% url 'servicio_list' %}">Servicios</a></li>
+            <li><a href="{% url 'pedido_list' %}">Pedidos</a></li>
+            <li><a href="{% url 'buscar_cliente' %}">Buscar Cliente</a></li>
+
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'perfil' %}">Perfil</a></li>
+                <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+                <li><a href="{% url 'register' %}">Registrar</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</body>
+
+</html>

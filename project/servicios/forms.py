@@ -1,6 +1,6 @@
 from django import forms
-
-from .models import Cliente, Servicio, Pedido
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from .models import Cliente, Servicio, Pedido, Usuario
 
 
 class ClienteForm(forms.ModelForm):
@@ -21,7 +21,7 @@ class ServicioForm(forms.ModelForm):
 
 class PedidoForm(forms.ModelForm):
     cliente = forms.ModelChoiceField(
-        queryset=Servicio.objects.all(), empty_label="Seleccione un cliente"
+        queryset=Cliente.objects.all(), empty_label="Seleccione un cliente"
     )
     servicio = forms.ModelChoiceField(
         queryset=Servicio.objects.filter(disponible=True),
@@ -34,3 +34,13 @@ class PedidoForm(forms.ModelForm):
         widgets = {
             "fecha_entrega": forms.DateTimeInput(attrs={"type": "datetime-local"})
         }
+
+class RegistroForm(UserCreationForm):
+    class Meta:
+        model = Usuario
+        fields = ['username', 'email', 'foto_perfil', 'password1', 'password2']
+
+class PerfilForm(UserChangeForm):
+    class Meta:
+        model = Usuario
+        fields = ['username', 'email', 'foto_perfil']

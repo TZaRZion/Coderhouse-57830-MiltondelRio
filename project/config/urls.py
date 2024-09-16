@@ -16,19 +16,28 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.contrib.auth.views import LogoutView  # Asegúrate de importar LogoutView
+
 from servicios import views
+
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", views.index, name="index"),
-    path("cliente/list/", views.cliente_list, name = "cliente_list"),
-    path("servicio/list/", views.servicio_list, name = "servicio_list"),
-    path("pedido/list/", views.pedido_list, name = "pedido_list"),
-    path("cliente/create/", views.cliente_create, name = "cliente_create"),
-    path("servicio/create/", views.servicio_create, name = "servicio_create"),
-    path("pedido/create/", views.pedido_create, name = "pedido_create"),
+    path("cliente/list/", views.cliente_list, name="cliente_list"),
+    path("servicio/list/", views.servicio_list, name="servicio_list"),
+    path("pedido/list/", views.pedido_list, name="pedido_list"),
+    path("cliente/create/", views.cliente_create, name="cliente_create"),
+    path("servicio/create/", views.servicio_create, name="servicio_create"),
+    path("pedido/create/", views.pedido_create, name="pedido_create"),
     path("buscar/", views.buscar_cliente, name="buscar_cliente"),
-
-
+    path('registro/', views.registro_view, name='register'),  # Verifica que 'register' esté aquí
+    path('login/', views.login_view, name='login'),
+    path('perfil/', views.perfil_view, name='perfil'),
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]
 
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

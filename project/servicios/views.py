@@ -1,6 +1,12 @@
 from django.shortcuts import render, redirect
 from .models import Cliente, Servicio, Pedido
-from .forms import ClienteForm, PedidoForm, ServicioForm, BuscarClienteForm
+from .forms import ClienteForm, PedidoForm, ServicioForm, BuscarClienteForm, RegistroForm, PerfilForm
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
+
+
+
 
 def index(request):
     return render(request, "servicios/index.html")
@@ -70,3 +76,42 @@ def buscar_cliente(request):
             resultados = Cliente.objects.filter(nombre__icontains=query)
 
     return render(request, "servicios/buscar_cliente.html", {"form": form, "resultados": resultados})
+
+
+    
+
+def registro_view(request):
+    if request.method == 'POST':
+        form = RegistroForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = RegistroForm()
+    return render(request, 'servicios/register.html', {'form': form})
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = authenticate(
+                username=form.cleaned_data.get('username'),
+                password=form.cleaned_data.get('password')
+            )
+            if user is not None:
+                login(request, user)
+                return redirect('index')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'servicios/login.html', {'form': form})
+
+@login_required
+def perfil_view(request):
+    if request.method == 'POST':
+        form = PerfilForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('perfil')
+    else:
+        form = PerfilForm(instance=request.user)
+    return render(request, 'servicios/profile.html', {'form': form})

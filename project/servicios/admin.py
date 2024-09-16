@@ -1,11 +1,7 @@
 from django.contrib import admin
 from .models import Cliente, Servicio, Pedido
 
-
-# admin.site.register(Cliente)
-# admin.site.register(Servicio)
-# admin.site.register(Pedido)
-
+# Registrar modelos en el panel de administración.
 @admin.register(Cliente)
 class ClienteAdmin(admin.ModelAdmin):
     list_display = ("apellido", "nombre", "celular")

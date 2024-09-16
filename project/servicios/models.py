@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
 class Cliente(models.Model):
@@ -39,3 +40,7 @@ class Pedido(models.Model):
 
     def __str__(self) -> str:
         return f"Pedido de {self.servicio.nombre} para {self.cliente.nombre}"
+
+
+class Usuario(AbstractUser):
+    foto_perfil = models.ImageField(upload_to='perfil/', blank=True, null=True)
