@@ -1,31 +1,32 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar</title>
-</head> mejoramelo dandole estilo y un orden un poco mas moderno 
-
-<body>
-    <nav>
-        <ul>
-            <li><a href="{% url 'index' %}">Inicio</a></li>
-            <li><a href="{% url 'cliente_list' %}">Clientes</a></li>
-            <li><a href="{% url 'servicio_list' %}">Servicios</a></li>
-            <li><a href="{% url 'pedido_list' %}">Pedidos</a></li>
-            <li><a href="{% url 'buscar_cliente' %}">Buscar Cliente</a></li>
-
-            {% if user.is_authenticated %}
-                <li><a href="{% url 'perfil' %}">Perfil</a></li>
-                <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
-            {% else %}
-                <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
-                <li><a href="{% url 'register' %}">Registrar</a></li>
-            {% endif %}
-        </ul>
-    </nav>
-</body>
-
-</html>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-5">
+        <a class="navbar-brand" href="{% url 'servicios:index' %}"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="{% url 'servicios:index' %}">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'servicios:perfil' %}">Perfil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'servicios:cliente_list' %}">Clientes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'servicios:servicio_list' %}">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'servicios:buscar_cliente' %}">Buscar Cliente</a></li>
+                    <li class="nav-item">
+                        <form action="{% url 'logout' %}" method="post" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link nav-link">Cerrar sesión</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'servicios:register' %}">Registro</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'servicios:login' %}">Login</a></li>
+                {% endif %}
+                
+            </ul>
+        </div>
+    </div>
+</nav>

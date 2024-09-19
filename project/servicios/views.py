@@ -4,7 +4,7 @@ from .forms import ClienteForm, PedidoForm, ServicioForm, BuscarClienteForm, Reg
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.views import LoginView
 
 
 
@@ -39,7 +39,7 @@ def cliente_create(request):
         form = ClienteForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("cliente_list")
+            return redirect("servicios:cliente_list")
     return render(request, "servicios/cliente_create.html", {"form": form})
 
 def servicio_create(request):
@@ -49,7 +49,7 @@ def servicio_create(request):
         form = ServicioForm(request.POST)  # Cambiado a ServicioForm
         if form.is_valid():
             form.save()
-            return redirect("servicio_list")
+            return redirect("servicios:servicio_list")
     return render(request, "servicios/servicio_create.html", {"form": form})
 
 def pedido_create(request):
@@ -59,7 +59,7 @@ def pedido_create(request):
         form = PedidoForm(request.POST)  # Cambiado a ServicioForm
         if form.is_valid():
             form.save()
-            return redirect("pedido_list")
+            return redirect("servicios:pedido_list")
     return render(request, "servicios/pedido_create.html", {"form": form})
 
 
@@ -100,7 +100,7 @@ def login_view(request):
             )
             if user is not None:
                 login(request, user)
-                return redirect('index')
+                return redirect('servicios:index')
     else:
         form = AuthenticationForm()
     return render(request, 'servicios/login.html', {'form': form})
@@ -115,3 +115,7 @@ def perfil_view(request):
     else:
         form = PerfilForm(instance=request.user)
     return render(request, 'servicios/profile.html', {'form': form})
+
+
+def pagina_cierre_sesion(request):
+    return render(request, 'servicios/logout.html')

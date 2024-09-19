@@ -6,7 +6,7 @@ Servicios: Registros
 
 {% block main %}
     <button>
-        <a href="{% url 'servicio_create' %}">Crear Registro</a>
+        <a href="{% url 'servicios:servicio_create' %}">Crear Registro</a>
     </button>
     {% for object in object_list %}
         <p>{{ object.nombre | upper }} ${{ object.precio }}</p>

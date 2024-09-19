@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -116,16 +117,30 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
-
-
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "core/static"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Configuración de autenticación
+# URL de la página de inicio de sesión
+LOGIN_URL = reverse_lazy('servicios:login')
+# URL a la que se redirige después de un inicio de sesión exitoso
+LOGIN_REDIRECT_URL = reverse_lazy('servicios:index')
+LOGOUT_REDIRECT_URL = reverse_lazy('servicios:pagina_cierre_sesion')
 
 
 AUTH_USER_MODEL = 'servicios.Usuario'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+try:
+    # Imprta la configuración de desarrollo cuando el archivo esté
+    from .settings_dev import *
+except ModuleNotFoundError:
+    pass
