@@ -119,3 +119,6 @@ def perfil_view(request):
 
 def pagina_cierre_sesion(request):
     return render(request, 'servicios/logout.html')
+
+def about_view(request):
+    return render(request, 'servicios/about.html')

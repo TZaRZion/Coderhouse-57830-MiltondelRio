@@ -17,6 +17,6 @@ urlpatterns = [
     path('perfil/', views.perfil_view, name='perfil'),
     path('login/', views.login_view, name='login'),
     path('pagina-cierre-sesion/', views.pagina_cierre_sesion, name='pagina_cierre_sesion'),
-
+    path('about/', views.about_view, name='about'),
     
 ]
