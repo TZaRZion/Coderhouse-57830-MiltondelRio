@@ -2,7 +2,7 @@
 from django.urls import path
 from . import views
 
-app_name = 'servicios'  # Define el namespace para esta aplicación
+app_name = 'servicios' 
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -19,4 +19,10 @@ urlpatterns = [
     path('pagina-cierre-sesion/', views.pagina_cierre_sesion, name='pagina_cierre_sesion'),
     path('about/', views.about_view, name='about'),
     
+    # Nuevas rutas para el CRUD de clientes
+    path('cliente/<int:id>/', views.cliente_detail, name='cliente_detail'),  # Ver detalles
+    path('cliente/<int:id>/editar/', views.cliente_update, name='cliente_update'),  # Editar
+    path('cliente/<int:id>/eliminar/', views.cliente_delete, name='cliente_delete'),  # Eliminar
+
+
 ]

@@ -1,3 +1,4 @@
+
 {% extends 'servicios/base.html' %}
 
 {% block header %}
@@ -5,15 +6,22 @@ Clientes: Registros
 {% endblock header %}
 
 {% block main %}
+    <h2></h2>    
     <button>
         <a href="{% url 'servicios:cliente_create' %}">Crear Registro</a>
     </button>
     <button>
         <a href="{% url 'servicios:buscar_cliente' %}">Buscar Cliente</a>
     </button>
+    
     {% for object in object_list %}
-        <p>{{ object | upper }} {{ object.nombre }} ({{object.celular}})</p>
-    {% empty%}
+        <p>
+            {{ object | upper }} {{ object.nombre }} ({{ object.celular }}) 
+            <a href="{% url 'servicios:cliente_detail' object.id %}">Ver Detalles</a>
+            <a href="{% url 'servicios:cliente_update' object.id %}">Editar</a>
+            <a href="{% url 'servicios:cliente_delete' object.id %}">Eliminar</a>
+        </p>
+    {% empty %}
         <p>No hay registros.</p>
     {% endfor %}
 {% endblock main %}

@@ -5,8 +5,9 @@ Servicios: Registros
 {% endblock header %}
 
 {% block main %}
+    <h2></h2>    
     <button>
-        <a href="{% url 'servicios:servicio_create' %}">Crear Registro</a>
+        <a href="{% url 'servicios:servicio_create' %}">Crear Servicio</a>
     </button>
     {% for object in object_list %}
         <p>{{ object.nombre | upper }} ${{ object.precio }}</p>

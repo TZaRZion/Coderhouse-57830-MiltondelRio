@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Cliente, Servicio, Pedido
 from .forms import ClienteForm, PedidoForm, ServicioForm, BuscarClienteForm, RegistroForm, PerfilForm
 from django.contrib.auth import login, authenticate
@@ -122,3 +122,32 @@ def pagina_cierre_sesion(request):
 
 def about_view(request):
     return render(request, 'servicios/about.html')
+
+
+
+# Editar cliente
+def cliente_update(request, id):
+    cliente = get_object_or_404(Cliente, id=id)  # Obtener el cliente existente
+    if request.method == "POST":
+        form = ClienteForm(request.POST, instance=cliente)  # Formulario con los datos del cliente
+        if form.is_valid():
+            form.save()  # Guardar los cambios
+            return redirect('servicios:cliente_list')  # Redirigir a la lista de clientes
+    else:
+        form = ClienteForm(instance=cliente)  # Mostrar el formulario con los datos actuales
+    return render(request, 'servicios/cliente_update.html', {'form': form})
+
+
+# Eliminar cliente
+def cliente_delete(request, id):
+    cliente = get_object_or_404(Cliente, id=id)  # Obtener el cliente existente
+    if request.method == "POST":
+        cliente.delete()  # Eliminar el cliente
+        return redirect('servicios:cliente_list')  # Redirigir a la lista de clientes
+    return render(request, 'servicios/cliente_delete.html', {'cliente': cliente})
+
+
+# Detalle de un cliente
+def cliente_detail(request, id):
+    cliente = get_object_or_404(Cliente, id=id)  # Obtener el cliente o lanzar un 404 si no existe
+    return render(request, "servicios/cliente_detail.html", {"cliente": cliente})

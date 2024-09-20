@@ -1,0 +1,12 @@
+{% extends 'servicios/base.html' %}
+
+{% block main %}
+  <h2>Detalle del Cliente</h2>
+  <p>Nombre: {{ cliente.nombre }}</p>
+  <p>Apellido: {{ cliente.apellido }}</p>
+  <p>Celular: {{ cliente.celular }}</p>
+  <p>Domicilio: {{ cliente.domicilio }}</p>
+  <p>Email: {{ cliente.email }}</p>
+  <a href="{% url 'servicios:cliente_update' cliente.id %}">Editar</a>
+  <a href="{% url 'servicios:cliente_delete' cliente.id %}">Eliminar</a>
+{% endblock %}

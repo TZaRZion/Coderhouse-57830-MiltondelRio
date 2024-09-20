@@ -1,10 +1,14 @@
 {% extends 'servicios/base.html' %}
 
+{% block header %}
+Mi Perfil
+{% endblock header %}
+
 {% block main %}
-<h2>Mi Perfil</h2>
+<h2></h2>
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Guardar</button>
+    <button type="submit">Actualizar</button>
 </form>
 {% endblock %}

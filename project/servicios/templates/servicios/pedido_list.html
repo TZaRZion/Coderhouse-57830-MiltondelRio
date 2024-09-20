@@ -5,8 +5,9 @@ Pedidos: Registros
 {% endblock header %}
 
 {% block main %}
+    <h2></h2>
     <button>
-        <a href="{% url 'servicios:pedido_create' %}">Crear Registro</a>
+        <a href="{% url 'servicios:pedido_create' %}">Crear Pedido</a>
     </button>
     {% for object in object_list %}
         <p>
