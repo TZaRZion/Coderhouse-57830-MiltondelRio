@@ -14,7 +14,7 @@
                     <li class="nav-item"><a class="nav-link" href="{% url 'servicios:perfil' %}">Perfil</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'servicios:cliente_list' %}">Clientes</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'servicios:servicio_list' %}">Servicios</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'servicios:buscar_cliente' %}">Buscar Cliente</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'servicios:pedido_list' %}">Pedidos</a></li>
                     <li class="nav-item">
                         <form action="{% url 'logout' %}" method="post" class="d-inline">
                             {% csrf_token %}
