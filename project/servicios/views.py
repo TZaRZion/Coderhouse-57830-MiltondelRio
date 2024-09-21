@@ -44,9 +44,9 @@ def cliente_create(request):
 
 def servicio_create(request):
     if request.method == "GET":
-        form = ServicioForm()  # Cambiado a ServicioForm
+        form = ServicioForm()  
     if request.method == "POST":
-        form = ServicioForm(request.POST)  # Cambiado a ServicioForm
+        form = ServicioForm(request.POST)  
         if form.is_valid():
             form.save()
             return redirect("servicios:servicio_list")
@@ -54,9 +54,9 @@ def servicio_create(request):
 
 def pedido_create(request):
     if request.method == "GET":
-        form = PedidoForm()  # Cambiado a ServicioForm
+        form = PedidoForm()  
     if request.method == "POST":
-        form = PedidoForm(request.POST)  # Cambiado a ServicioForm
+        form = PedidoForm(request.POST)  
         if form.is_valid():
             form.save()
             return redirect("servicios:pedido_list")
@@ -125,29 +125,29 @@ def about_view(request):
 
 
 
-# Editar cliente
+# Actualizar cliente
 def cliente_update(request, id):
-    cliente = get_object_or_404(Cliente, id=id)  # Obtener el cliente existente
+    cliente = get_object_or_404(Cliente, id=id)  
     if request.method == "POST":
-        form = ClienteForm(request.POST, instance=cliente)  # Formulario con los datos del cliente
+        form = ClienteForm(request.POST, instance=cliente)  
         if form.is_valid():
-            form.save()  # Guardar los cambios
-            return redirect('servicios:cliente_list')  # Redirigir a la lista de clientes
+            form.save()  
+            return redirect('servicios:cliente_list')  
     else:
-        form = ClienteForm(instance=cliente)  # Mostrar el formulario con los datos actuales
+        form = ClienteForm(instance=cliente)  
     return render(request, 'servicios/cliente_update.html', {'form': form})
 
 
 # Eliminar cliente
 def cliente_delete(request, id):
-    cliente = get_object_or_404(Cliente, id=id)  # Obtener el cliente existente
+    cliente = get_object_or_404(Cliente, id=id)
     if request.method == "POST":
-        cliente.delete()  # Eliminar el cliente
-        return redirect('servicios:cliente_list')  # Redirigir a la lista de clientes
+        cliente.delete() 
+        return redirect('servicios:cliente_list') 
     return render(request, 'servicios/cliente_delete.html', {'cliente': cliente})
 
 
 # Detalle de un cliente
 def cliente_detail(request, id):
-    cliente = get_object_or_404(Cliente, id=id)  # Obtener el cliente o lanzar un 404 si no existe
+    cliente = get_object_or_404(Cliente, id=id)  
     return render(request, "servicios/cliente_detail.html", {"cliente": cliente})
