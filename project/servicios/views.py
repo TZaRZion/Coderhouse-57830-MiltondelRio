@@ -111,7 +111,7 @@ def perfil_view(request):
         form = PerfilForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('perfil')
+            return redirect('servicios:perfil')
     else:
         form = PerfilForm(instance=request.user)
     return render(request, 'servicios/profile.html', {'form': form})
